@@ -1,0 +1,87 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:transparent; overflow:hidden; font-family:'Arial Bold',sans-serif; }
+
+.overlay { position:relative; width:100vw; height:100vh; }
+
+/* Fondo gradiente celeste */
+.bg {
+  position:absolute; inset:0; z-index:1;
+  background: linear-gradient(135deg, #001f3f 0%, #0074d9 40%, #7fdbff 100%);
+  background-size: 200% 200%;
+  animation: bgGradient 18s ease infinite;
+}
+@keyframes bgGradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+/* Barra SUPER ARRIBA Y PEQUEÑA (posición igual) */
+.topbar {
+  position:absolute;
+  top:0; left:0; right:0;
+  z-index:10;
+  padding:0.4vw 3vw; /* posición y tamaño igual */
+  background: linear-gradient(90deg, #003366, #0055aa, #003366);
+  background-size: 300% 100%;
+  animation: gradient 12s ease infinite;
+  border-bottom: 0.3vw solid #ffffff;
+}
+@keyframes gradient { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+.container {
+  max-width:1920px; margin:0 auto;
+  display:flex; align-items:center; gap:3vw;
+}
+
+/* LOGO ANIMADO + GLOW SUTIL */
+.logo-area { position:relative; z-index:3; }
+.logo-animated {
+  position:relative;
+  width:22vw; max-width:360px; min-width:240px;
+  animation: logoFloat 12s ease-in-out infinite;
+}
+.logo-single { width:100%; display:block; }
+
+/* Glow sutil */
+.logo-glow {
+  position:absolute;
+  inset:-6px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  animation: glowPulse 10s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+}
+@keyframes glowPulse { 0%,100%{opacity:0.2} 50%{opacity:0.4} }
+
+/* Brillo que pasa */
+.logo-shine {
+  position:absolute;
+  top:-100%; left:-100%;
+  width:100%; height:200%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shine 8s linear infinite;
+  pointer-events:none;
+  z-index:3;
+}
+@keyframes logoFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes shine { 0%{transform:translateX(-200%) translateY(-50%) rotate(30deg)} 100%{transform:translateX(200%) translateY(-50%) rotate(30deg)} }
+
+/* REDES MÁS GRANDES (íconos y textos) */
+.socials {
+  display:flex; gap:5vw; color:#ffffff; margin-left:-1vw;
+}
+.social { text-align:center; display:flex; flex-direction:column; align-items:center; }
+.social img { width:9vw; max-width:115px; min-width:70px; margin-bottom:0.8vw; } /* íconos más grandes */
+.social.yt img { width:10vw; max-width:130px; }
+.name { font-size:clamp(14px,1.6vw,24px); letter-spacing:0.18em; opacity:0.9; margin-bottom:0.3vw; } /* plataforma más grande */
+.user { font-size:clamp(20px,2.8vw,42px); letter-spacing:0.08em; } /* usuario mucho más grande */
+
+/* Hover */
+.social:hover img { transform:scale(1.12); transition:0.3s; }
+.social:hover .user { color:#7fdbff; transition:0.3s; }
+
+/* LÍNEA BLANCA JUSTO DEBAJO */
+.line { position:absolute; top:5vh; height:0.3vw; min-height:3px; background:#ffffff; width:100%; }
+
+/* Fade in */
+.topbar,.line { opacity:0; animation:fade 1.8s forwards; }
+.topbar { animation-delay:0.4s; }
+.line { animation-delay:1s; }
+@keyframes fade { to{opacity:1} }
